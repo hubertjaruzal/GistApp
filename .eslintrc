@@ -1,0 +1,22 @@
+{
+  "env": {
+    "node": true,
+    "jest": true,
+    "browser": true
+  },
+  ecmaFeatures: {
+    jsx: true
+  },
+  "globals": {
+  },
+  "plugins": [
+  ],
+  "extends": "eslint-config-airbnb",
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "comma-dangle": 0,
+    "no-console": 0,
+    "id-length": 0,
+    "react/prop-types": 0
+  }
+}
