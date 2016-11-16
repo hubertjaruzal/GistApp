@@ -4,9 +4,10 @@ import 'bootstrap-sass/assets/javascripts/bootstrap.min';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import AppRouter from './config/AppRouter';
+import AppStore from './store/AppStore';
 
 ReactDOM.render(
-  <App />,
+  <AppRouter todoStore={new AppStore()} />,
   document.body.appendChild(document.createElement('div'))
 );
