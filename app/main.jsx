@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom';
 import AppRouter from './config/AppRouter';
 import AppStore from './store/AppStore';
 
+require('./styles/app.scss');
+
 ReactDOM.render(
   <AppRouter appStore={new AppStore()} />,
   document.body.appendChild(document.createElement('div'))

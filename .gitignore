@@ -3,4 +3,3 @@ build/
 npm-debug.log
 .DS_Store
 gatekeeper
-webpack.config.js
