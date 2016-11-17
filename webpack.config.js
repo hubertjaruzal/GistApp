@@ -55,5 +55,10 @@ module.exports = {
       'windows.jQuery': 'jquery',
       jQuery: 'jquery'
     })
-  ]
+  ],
+  externals: {
+    Config: JSON.stringify({
+      key: 'KEY'
+    })
+  }
 };

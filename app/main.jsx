@@ -8,6 +8,6 @@ import AppRouter from './config/AppRouter';
 import AppStore from './store/AppStore';
 
 ReactDOM.render(
-  <AppRouter todoStore={new AppStore()} />,
+  <AppRouter appStore={new AppStore()} />,
   document.body.appendChild(document.createElement('div'))
 );
