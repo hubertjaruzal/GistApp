@@ -51,7 +51,9 @@ class App extends Component {
           avatar={this.props.route.store.user.avatar_url}
         />
         <section className="main__container">
-          <Menu />
+          <Menu
+            store={this.props.route.store}
+          />
           <List
             store={this.props.route.store}
           />

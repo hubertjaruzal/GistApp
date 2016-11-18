@@ -3,6 +3,7 @@
   height: calc(100% - 50px);
   display: inline-block;
   background: $second-color;
+  overflow: auto;
 }
 
 .list__gist {

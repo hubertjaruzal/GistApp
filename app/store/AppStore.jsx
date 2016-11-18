@@ -50,6 +50,22 @@ class AppStore {
     });
   }
 
+  @action getPublicGistsData = () => {
+    fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
+      return response.json();
+    }).then(json => {
+      return this.gists = json.filter(x => x.public);
+    });
+  }
+
+  @action getPrivateGistsData = () => {
+    fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
+      return response.json();
+    }).then(json => {
+      return this.gists = json.filter(x => !x.public);
+    });
+  }
+
   @action getGistData = (id) => {
     fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`).then((response) => {
       return response.json();

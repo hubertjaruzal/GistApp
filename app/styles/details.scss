@@ -10,8 +10,15 @@
 .details__name {
   display: inline-block;
   margin: 0 10px 0 0;
+  vertical-align: middle;
 }
 
 .details__header {
-  margin: 0 0 10px 0;
+  background: #f3f3f3;
+  padding: 5px;
+  border-top: 1px solid $border-second-grey;
+  border-right: 1px solid $border-second-grey;
+  border-left: 1px solid $border-second-grey;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }

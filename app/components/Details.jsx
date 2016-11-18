@@ -39,8 +39,15 @@ class Details extends Component {
   render() {
     return (
       <section className="details__container">
-        <h2>Details</h2>
-        <p>{this.props.store.gist.id}</p>
+        {this.props.store.gist.id &&
+          <h2>Details</h2>
+        }
+        {this.props.store.gist.description !== '' &&
+          <p>{this.props.store.gist.description}</p>
+        }
+        {this.props.store.gist.id &&
+          <p>{this.props.store.gist.public ? 'Public' : 'Private'} Gist</p>
+        }
         <div className="details__code">
           {
             this.renderCodemirror().map((data, index) => {

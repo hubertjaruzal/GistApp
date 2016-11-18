@@ -7,10 +7,37 @@ class Menu extends Component {
     super(props);
   }
 
+  getGistsData() {
+    this.props.store.getGistsData();
+  }
+
+  getPublicGistsData() {
+    this.props.store.getPublicGistsData();
+  }
+
+  getPrivateGistsData() {
+    this.props.store.getPrivateGistsData();
+  }
+
   render() {
     return (
       <nav className="menu__container">
-
+        <button
+          className="menu__button"
+          onClick={() => this.getGistsData()}
+        >
+          All Gists
+        </button>
+        <button
+          className="menu__button" onClick={() => this.getPublicGistsData()}
+        >
+          Public Gists
+        </button>
+        <button
+          className="menu__button" onClick={() => this.getPrivateGistsData()}
+        >
+          Private Gists
+        </button>
       </nav>
     );
   }
