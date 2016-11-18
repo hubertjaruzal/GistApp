@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+import Header from './Header';
+import Menu from './Menu';
+import List from './List';
+import Details from './Details';
 
 @observer
 class App extends Component {
@@ -23,36 +27,38 @@ class App extends Component {
     this.props.route.store.getUserData();
   }
 
+  getGistsData() {
+    this.props.route.store.getGistsData();
+  }
+
   componentWillMount() {
     if(this.props.route.store.isUserLoggedIn()) {
       this.toggleLoggedIn();
       this.saveLoggedIn(true);
       this.setTokenFromStorage();
       this.getUserData();
+      this.getGistsData();
     }
   }
 
   render() {
     return (
       <section>
-        <header className="navbar navbar-default navbar__container">
-          <div className="user__info">
-            {!this.props.route.store.loggedIn ?
-              <button
-                className="user__info--login"
-                onClick={() => {
-                  location.href = `https://github.com/login/oauth/authorize?scope=user:email,gist&client_id=${this.props.route.Config.key}`;
-                }}
-              >
-                Sign in with github
-              </button> :
-              <div>
-                <p className="user__info--name">{this.props.route.store.user.name}</p>
-                <img className="user__info--avatar" src={this.props.route.store.user.avatar_url} />
-              </div>
-            }
-          </div>
-        </header>
+        <Header
+          isLoggedIn={this.props.route.store.loggedIn}
+          key={this.props.route.Config.key}
+          username={this.props.route.store.user.name}
+          avatar={this.props.route.store.user.avatar_url}
+        />
+        <section className="main__container">
+          <Menu />
+          <List
+            store={this.props.route.store}
+          />
+          <Details
+            gist={this.props.route.store.gist}
+          />
+        </section>
         <div>
           {this.props.children}
         </div>

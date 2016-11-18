@@ -4,6 +4,8 @@ class AppStore {
   @observable token = '';
   @observable loggedIn = false;
   @observable user = {};
+  @observable gists = [];
+  @observable gist = {};
 
   @action saveToken = (token) => {
     localStorage.setItem('userToken', token);
@@ -37,6 +39,22 @@ class AppStore {
       return response.json();
     }).then(json => {
       return this.user = json;
+    });
+  }
+
+  @action getGistsData = () => {
+    fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
+      return response.json();
+    }).then(json => {
+      return this.gists = json;
+    });
+  }
+
+  @action getGistData = (id) => {
+    fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`).then((response) => {
+      return response.json();
+    }).then(json => {
+      return this.gist = json;
     });
   }
 }

@@ -1,0 +1,19 @@
+.list__container {
+  width: 250px;
+  height: calc(100% - 50px);
+  display: inline-block;
+  background: $second-color;
+}
+
+.list__gist {
+  padding: 10px;
+  border-bottom: 1px solid $border-grey;
+  cursor: pointer;
+  background: $second-color;
+  p {
+    margin: 0;
+  }
+  &:hover {
+    background: $hover-grey;
+  }
+}
