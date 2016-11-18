@@ -57,6 +57,27 @@ class AppStore {
       return this.gist = json;
     });
   }
+
+  @action editGist = (id, filename, content, description = '') => {
+    fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
+          description: description,
+          files: {
+            [filename]: {
+              content: content
+            }
+          }
+        })
+      }).then((response) => {
+      return response.json();
+    });
+  }
 }
 
 export default AppStore;

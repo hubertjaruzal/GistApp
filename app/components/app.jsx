@@ -56,7 +56,7 @@ class App extends Component {
             store={this.props.route.store}
           />
           <Details
-            gist={this.props.route.store.gist}
+            store={this.props.route.store}
           />
         </section>
         <div>

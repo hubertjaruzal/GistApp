@@ -3,6 +3,8 @@
 @import './menu';
 @import './list';
 @import './details';
+@import './buttons';
+@import '../../node_modules/codemirror/lib/codemirror.css';
 
 body {
   width: 100%;
@@ -13,4 +15,24 @@ body {
 
 .main__container {
   display: flex;
+}
+
+label {
+	color: #999;
+	display: inline-block;
+	font-size: 0.85em;
+	font-weight: bold;
+	margin: 1em 0;
+	text-transform: uppercase;
+}
+
+.hint {
+	margin: 15px 0;
+	font-style: italic;
+	color: #999;
+}
+
+.ReactCodeMirror {
+	border: 1px solid #ccc;
+  margin-bottom: 20px;
 }

@@ -15,6 +15,7 @@
   "dependencies": {
     "babel-runtime": "6.x",
     "bootstrap-sass": "^3.3.7",
+    "codemirror": "^5.20.2",
     "copy-webpack-plugin": "latest",
     "fetch-everywhere": "^1.0.5",
     "install": "^0.8.1",
@@ -26,6 +27,8 @@
     "open-browser-webpack-plugin": "0.0.2",
     "paginator": "^1.0.0",
     "react": "15.x",
+    "react-codemirror": "^0.2.6",
+    "material-design-icons": "^3.0.1",
     "react-dom": "15.x",
     "react-imageloader": "^2.1.0",
     "react-infinite": "^0.10.0",

@@ -4,4 +4,14 @@
   padding: 0 10px;
   display: inline-block;
   background: white;
+  overflow: auto;
+}
+
+.details__name {
+  display: inline-block;
+  margin: 0 10px 0 0;
+}
+
+.details__header {
+  margin: 0 0 10px 0;
 }
