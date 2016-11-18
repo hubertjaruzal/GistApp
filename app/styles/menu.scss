@@ -10,7 +10,11 @@
   border: none;
   outline: none;
   padding: 10px;
-  background: #685c7d;
+  background: $main-color;
   color: white;
-  border-bottom: 1px solid #564a6b;
+  border-bottom: 1px solid $main-color-border;
+  transition: 2s all;
+  &:hover {
+   background: $main-color-hover;
+  }
 }

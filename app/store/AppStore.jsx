@@ -94,6 +94,24 @@ class AppStore {
       return response.json();
     });
   }
+
+  @action deleteGist = (id, filename) => {
+    fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
+          files: {
+            [filename]: null
+          }
+        })
+      }).then((response) => {
+      return response.json();
+    });
+  }
 }
 
 export default AppStore;

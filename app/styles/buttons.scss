@@ -1,12 +1,13 @@
-.button__edit {
+.button__header {
   border: none;
   outline: none;
-  background: $main-color;;
+  background: $main-color;
   color: white;
   font-weight: 200;
   border-radius: 25px;
   width: 22px;
   height: 22px;
+  margin: 0 5px 0 0;
   padding: 0;
   transition: 2s all;
   &:hover {
@@ -15,5 +16,19 @@
   i {
     font-size: 14px;
     vertical-align: middle;
+  }
+}
+
+.button__edit {
+  background: $main-color;
+  &:hover {
+    background: $main-color-hover;
+  }
+}
+
+.button__delete {
+  background: $red-color;
+  &:hover {
+    background: $red-color-hover;
   }
 }

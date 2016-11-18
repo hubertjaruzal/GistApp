@@ -22,6 +22,10 @@ class Details extends Component {
     this.props.store.editGist(id, filename, content);
   }
 
+  deleteGist(id, filename) {
+    this.props.store.deleteGist(id, filename);
+  }
+
   getCodemirrorValue(mirrorClass) {
     let codemirrorArray = [];
     let codemirrorText = document.querySelectorAll(`.${mirrorClass} .CodeMirror-code .CodeMirror-line`);
@@ -56,10 +60,16 @@ class Details extends Component {
                   <div className="details__header">
                     <p className="details__name">{index+1}. {data.filename}</p>
                     <button
-                      className="button__edit"
+                      className="button__header button__edit"
                       onClick={() => this.editGist(this.props.store.gist.id, data.filename, this.getCodemirrorValue(`codemirror__${index}`))}
                     >
                       <i className="material-icons">mode_edit</i>
+                    </button>
+                    <button
+                      className="button__header button__delete"
+                      onClick={() => this.deleteGist(this.props.store.gist.id, data.filename)}
+                    >
+                      <i className="material-icons">clear</i>
                     </button>
                   </div>
                   <Codemirror value={data.content} className={`codemirror__${index}`} options={{mode: 'javascript', lineNumbers: true, readOnly: false}}/>
