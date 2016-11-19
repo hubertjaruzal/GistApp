@@ -9,6 +9,7 @@ class AppStore {
   @observable showModalFile = false;
   @observable showModalGist = false;
   @observable ownGists = false;
+  @observable labels = [];
 
   @action saveToken = (token) => {
     localStorage.setItem('userToken', token);
@@ -19,11 +20,11 @@ class AppStore {
   }
 
   @action setTokenFromStorage = () => {
-    return this.token = localStorage.getItem('userToken');
+    return this.token = localStorage.getItem("userToken");
   }
 
   @action saveLoggedIn = (loggedIn) => {
-    localStorage.setItem('loggedIn', loggedIn);
+    localStorage.setItem("loggedIn", loggedIn);
   }
 
   @action toggleLoggedIn = () => {
@@ -31,10 +32,27 @@ class AppStore {
   }
 
   @action isUserLoggedIn = () => {
-    if(localStorage.getItem('loggedIn') == 'true') {
+    if(localStorage.getItem("loggedIn") == "true") {
       return true;
     }
     return false;
+  }
+
+  @action setLabelsFromStorage = (label) => {
+    return this.labels = JSON.parse("["+localStorage.getItem("labels")+"]");
+  }
+
+  @action createLabel = (label) => {
+    let labels = [];
+    if(localStorage["labels"] !== undefined) {
+      labels = JSON.parse("["+localStorage["labels"]+"]");
+    }
+    labels.push(label)
+    labels = labels.map(function(e){
+      return JSON.stringify(e);
+    });
+    localStorage.setItem('labels', labels.join(", "));
+    this.labels = JSON.parse("["+localStorage.getItem("labels")+"]");
   }
 
   @action toggleShowModalFile = () => {

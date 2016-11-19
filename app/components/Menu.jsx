@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+import Labels from './Labels';
 
 @observer
 class Menu extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.store.labels.length)
   }
 
   getGistsData() {
@@ -56,6 +58,9 @@ class Menu extends Component {
         >
           Create Gist
         </button>
+        <Labels
+          store={this.props.store}
+        />
       </nav>
     );
   }
