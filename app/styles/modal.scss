@@ -20,7 +20,7 @@
   border-radius: 20px;
   margin: 0;
   &--container {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     button {
       float: right;
@@ -66,26 +66,28 @@
     }
   }
   &--content {
+    margin: 0 5%;
+    padding: 0 15px;
     overflow: auto;
     height: 390px;
   }
   &--radios {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0 0 10px 0;
     label {
       margin: 0 10px 0 5px;
     }
   }
   &--filename, &--description {
-    width: 90%;
+    width: 100%;
     padding: 5px;
-    margin: 10px auto;
+    margin: 0 0 10px 0;
     display: block;
     outline: none;
     border: 1px solid $border-second-grey;
   }
   .ReactCodeMirror {
-    width: 90%;
+    width: 100%;
     margin: 5px auto;
   }
 }

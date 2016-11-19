@@ -55,7 +55,9 @@ class ModalFile extends Component {
               className="modal__box--filename"
               placeholder="Filename"
             />
-            <Codemirror value={""} className="modal__box--codemirror" options={{mode: "javascript", lineNumbers: true, readOnly: false}}/>
+            <div>
+              <Codemirror value={""} className="modal__box--codemirror" options={{mode: "javascript", lineNumbers: true, readOnly: false}}/>
+            </div>
             <div className="modal__box--container">
               <button
                 onClick={() => this.addGistFile(this.props.store.gist.id, this.getInputValue("modal__box--filename"), this.getCodemirrorValue("modal__box--codemirror"))}

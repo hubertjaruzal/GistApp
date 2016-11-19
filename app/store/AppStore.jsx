@@ -57,6 +57,7 @@ class AppStore {
     fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
+      this.gist =  {};
       this.ownGists =  true;
       return this.gists = json;
     });
