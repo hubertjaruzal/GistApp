@@ -13,15 +13,16 @@
     vertical-align: middle;
     margin: 15px 0;
   }
-  button {
-    margin: 0 10px;
-    outline: none;
-    border: none;
-    background: $main-color;
-    color: white;
-    border-radius: 10px;
-    padding: 5px;
-    font-size: 12px;
+  &--buttons {
+    display: inline-block;
+    button {
+      margin: 0 10px;
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      padding: 5px;
+      font-size: 12px;
+    }
   }
 }
 

@@ -7,6 +7,7 @@ class AppStore {
   @observable gists = [];
   @observable gist = {};
   @observable showModal = false;
+  @observable ownGists = false;
 
   @action saveToken = (token) => {
     localStorage.setItem('userToken', token);
@@ -51,6 +52,7 @@ class AppStore {
     fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
+      this.ownGists =  true;
       return this.gists = json;
     });
   }
@@ -59,6 +61,8 @@ class AppStore {
     fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
+      this.gist =  {};
+      this.ownGists =  true;
       return this.gists = json.filter(x => x.public);
     });
   }
@@ -67,6 +71,8 @@ class AppStore {
     fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
+      this.gist =  {};
+      this.ownGists =  true;
       return this.gists = json.filter(x => !x.public);
     });
   }
@@ -83,6 +89,8 @@ class AppStore {
     fetch(`https://api.github.com/gists/starred?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
+      this.gist =  {};
+      this.ownGists =  false;
       return this.gists = json;
     });
   }
@@ -128,7 +136,7 @@ class AppStore {
     });
   }
 
-  @action deleteGist = (id, filename) => {
+  @action deleteGistFile = (id, filename) => {
     fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`,
       {
         headers: {
@@ -141,6 +149,19 @@ class AppStore {
             [filename]: null
           }
         })
+      }).then((response) => {
+      return response.json();
+    });
+  }
+
+  @action deleteGist = (id) => {
+    fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'DELETE'
       }).then((response) => {
       return response.json();
     });

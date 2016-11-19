@@ -22,8 +22,12 @@ class Details extends Component {
     this.props.store.editGist(id, filename, content);
   }
 
-  deleteGist(id, filename) {
-    this.props.store.deleteGist(id, filename);
+  deleteGistFile(id, filename) {
+    this.props.store.deleteGistFile(id, filename);
+  }
+
+  deleteGist(id) {
+    this.props.store.deleteGist(id);
   }
 
   getCodemirrorValue(mirrorClass) {
@@ -50,11 +54,24 @@ class Details extends Component {
         {this.props.store.gist.id &&
           <div className="details__top">
             <h2>Details</h2>
-            <button
-              onClick={() => this.toggleShowModal()}
-            >
-              Add file
-            </button>
+            {this.props.store.ownGists &&
+              <div
+                className="details__top--buttons"
+              >
+                <button
+                  className="button__main"
+                  onClick={() => this.toggleShowModal()}
+                >
+                  Add file
+                </button>
+                <button
+                  className="button__red"
+                  onClick={() => this.deleteGist(this.props.store.gist.id)}
+                >
+                  Remove Gist
+                </button>
+              </div>
+            }
           </div>
         }
         {this.props.store.gist.description !== '' &&
@@ -78,7 +95,7 @@ class Details extends Component {
                     </button>
                     <button
                       className="button__header button__delete"
-                      onClick={() => this.deleteGist(this.props.store.gist.id, data.filename)}
+                      onClick={() => this.deleteGistFile(this.props.store.gist.id, data.filename)}
                     >
                       <i className="material-icons">clear</i>
                     </button>

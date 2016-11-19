@@ -38,3 +38,13 @@ label {
 	border: 1px solid #ccc;
   margin-bottom: 20px;
 }
+
+.button__red {
+  background: $red-color;
+  color: white;
+}
+
+.button__main {
+  background: $main-color;
+  color: white;
+}

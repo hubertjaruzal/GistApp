@@ -7,14 +7,15 @@
 }
 
 .list__gist {
+  position: relative;
   padding: 10px;
   border-bottom: 1px solid $border-grey;
   cursor: pointer;
   background: $second-color;
-  p {
-    margin: 0;
-  }
   &:hover {
     background: $hover-grey;
+  }
+  p {
+    margin: 0;
   }
 }
