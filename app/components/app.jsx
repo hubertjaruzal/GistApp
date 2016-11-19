@@ -4,6 +4,7 @@ import Header from './Header';
 import Menu from './Menu';
 import List from './List';
 import Details from './Details';
+import Modal from './Modal';
 
 @observer
 class App extends Component {
@@ -44,6 +45,11 @@ class App extends Component {
   render() {
     return (
       <section>
+        {this.props.route.store.showModal &&
+          <Modal
+            store={this.props.route.store}
+          />
+        }
         <Header
           isLoggedIn={this.props.route.store.loggedIn}
           key={this.props.route.Config.key}

@@ -40,17 +40,28 @@ class Details extends Component {
     return codemirrorText;
   }
 
+  toggleShowModal() {
+    this.props.store.toggleShowModal();
+  }
+
   render() {
     return (
       <section className="details__container">
         {this.props.store.gist.id &&
-          <h2>Details</h2>
+          <div className="details__top">
+            <h2>Details</h2>
+            <button
+              onClick={() => this.toggleShowModal()}
+            >
+              Add file
+            </button>
+          </div>
         }
         {this.props.store.gist.description !== '' &&
           <p>{this.props.store.gist.description}</p>
         }
         {this.props.store.gist.id &&
-          <p>{this.props.store.gist.public ? 'Public' : 'Private'} Gist</p>
+          <p>{this.props.store.gist.public ? "Public" : "Private"} Gist</p>
         }
         <div className="details__code">
           {
@@ -72,7 +83,7 @@ class Details extends Component {
                       <i className="material-icons">clear</i>
                     </button>
                   </div>
-                  <Codemirror value={data.content} className={`codemirror__${index}`} options={{mode: 'javascript', lineNumbers: true, readOnly: false}}/>
+                  <Codemirror value={data.content} className={`codemirror__${index}`} options={{mode: "javascript", lineNumbers: true, readOnly: false}}/>
                 </div>
               )
             })

@@ -6,6 +6,7 @@ class AppStore {
   @observable user = {};
   @observable gists = [];
   @observable gist = {};
+  @observable showModal = false;
 
   @action saveToken = (token) => {
     localStorage.setItem('userToken', token);
@@ -32,6 +33,10 @@ class AppStore {
       return true;
     }
     return false;
+  }
+
+  @action toggleShowModal = () => {
+    return this.showModal = !this.showModal
   }
 
   @action getUserData = () => {
@@ -92,6 +97,26 @@ class AppStore {
         method: 'PATCH',
         body: JSON.stringify({
           description: description,
+          files: {
+            [filename]: {
+              content: content
+            }
+          }
+        })
+      }).then((response) => {
+      return response.json();
+    });
+  }
+
+  @action addGist = (id, filename, content) => {
+    fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
           files: {
             [filename]: {
               content: content
