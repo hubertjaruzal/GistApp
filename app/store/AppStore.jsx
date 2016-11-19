@@ -74,6 +74,14 @@ class AppStore {
     });
   }
 
+  @action getStarredGistData = () => {
+    fetch(`https://api.github.com/gists/starred?access_token=${this.token}`).then((response) => {
+      return response.json();
+    }).then(json => {
+      return this.gists = json;
+    });
+  }
+
   @action editGist = (id, filename, content, description = '') => {
     fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`,
       {

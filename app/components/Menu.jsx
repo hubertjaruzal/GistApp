@@ -19,6 +19,10 @@ class Menu extends Component {
     this.props.store.getPrivateGistsData();
   }
 
+  getStarredGistData() {
+    this.props.store.getStarredGistData();
+  }
+
   render() {
     return (
       <nav className="menu__container">
@@ -37,6 +41,11 @@ class Menu extends Component {
           className="menu__button" onClick={() => this.getPrivateGistsData()}
         >
           Private Gists
+        </button>
+        <button
+          className="menu__button" onClick={() => this.getStarredGistData()}
+        >
+          Starred Gists
         </button>
       </nav>
     );
