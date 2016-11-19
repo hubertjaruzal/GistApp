@@ -65,16 +65,27 @@
       }
     }
   }
-  &--filename {
+  &--content {
+    overflow: auto;
+    height: 390px;
+  }
+  &--radios {
+    width: 90%;
+    margin: 0 auto;
+    label {
+      margin: 0 10px 0 5px;
+    }
+  }
+  &--filename, &--description {
     width: 90%;
     padding: 5px;
-    margin: 0 auto;
+    margin: 10px auto;
     display: block;
     outline: none;
     border: 1px solid $border-second-grey;
   }
   .ReactCodeMirror {
     width: 90%;
-    margin: 10px auto;
+    margin: 5px auto;
   }
 }

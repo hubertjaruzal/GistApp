@@ -5,7 +5,7 @@ import '../../node_modules/codemirror/mode/jsx/jsx'
 import '../../node_modules/codemirror/lib/codemirror.css'
 
 @observer
-class Modal extends Component {
+class ModalFile extends Component {
   constructor(props) {
     super(props);
   }
@@ -24,18 +24,18 @@ class Modal extends Component {
     return codemirrorText;
   }
 
-  getFilenameValue(filenameClass) {
+  getInputValue(filenameClass) {
     let filename = '';
     filename = document.querySelectorAll(`.${filenameClass}`);
     return filename[0].value;
   }
 
-  toggleShowModal() {
-    this.props.store.toggleShowModal();
+  toggleShowModalFile() {
+    this.props.store.toggleShowModalFile();
   }
 
-  addGist(id, filename, content) {
-    this.props.store.addGist(id, filename, content);
+  addGistFile(id, filename, content) {
+    this.props.store.addGistFile(id, filename, content);
   }
 
   render() {
@@ -45,22 +45,24 @@ class Modal extends Component {
           <header className="modal__box--header">
             Add File
             <button
-              onClick={() => this.toggleShowModal()}
+              onClick={() => this.toggleShowModalFile()}
             >
               <i className="material-icons">clear</i>
             </button>
           </header>
-          <input
-            className="modal__box--filename"
-            placeholder="Filename"
-          />
-          <Codemirror value={""} className="modal__box--codemirror" options={{mode: "javascript", lineNumbers: true, readOnly: false}}/>
-          <div className="modal__box--container">
-            <button
-              onClick={() => this.addGist(this.props.store.gist.id, this.getFilenameValue("modal__box--filename"), this.getCodemirrorValue("modal__box--codemirror"))}
-            >
-              Save
-            </button>
+          <div className="modal__box--content">
+            <input
+              className="modal__box--filename"
+              placeholder="Filename"
+            />
+            <Codemirror value={""} className="modal__box--codemirror" options={{mode: "javascript", lineNumbers: true, readOnly: false}}/>
+            <div className="modal__box--container">
+              <button
+                onClick={() => this.addGistFile(this.props.store.gist.id, this.getInputValue("modal__box--filename"), this.getCodemirrorValue("modal__box--codemirror"))}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -68,4 +70,4 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+export default ModalFile;

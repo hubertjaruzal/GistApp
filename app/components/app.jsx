@@ -4,7 +4,8 @@ import Header from './Header';
 import Menu from './Menu';
 import List from './List';
 import Details from './Details';
-import Modal from './Modal';
+import ModalFile from './ModalFile'
+import ModalGist from './ModalGist';
 
 @observer
 class App extends Component {
@@ -45,8 +46,13 @@ class App extends Component {
   render() {
     return (
       <section>
-        {this.props.route.store.showModal &&
-          <Modal
+        {this.props.route.store.showModalGist &&
+          <ModalGist
+            store={this.props.route.store}
+          />
+        }
+        {this.props.route.store.showModalFile &&
+          <ModalFile
             store={this.props.route.store}
           />
         }

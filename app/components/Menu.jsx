@@ -23,6 +23,10 @@ class Menu extends Component {
     this.props.store.getStarredGistData();
   }
 
+  toggleShowModalGist() {
+    this.props.store.toggleShowModalGist();
+  }
+
   render() {
     return (
       <nav className="menu__container">
@@ -46,6 +50,11 @@ class Menu extends Component {
           className="menu__button" onClick={() => this.getStarredGistData()}
         >
           Starred Gists
+        </button>
+        <button
+          className="menu__button" onClick={() => this.toggleShowModalGist()}
+        >
+          Create Gist
         </button>
       </nav>
     );

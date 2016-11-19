@@ -44,8 +44,8 @@ class Details extends Component {
     return codemirrorText;
   }
 
-  toggleShowModal() {
-    this.props.store.toggleShowModal();
+  toggleShowModalFile() {
+    this.props.store.toggleShowModalFile();
   }
 
   render() {
@@ -60,7 +60,7 @@ class Details extends Component {
               >
                 <button
                   className="button__main"
-                  onClick={() => this.toggleShowModal()}
+                  onClick={() => this.toggleShowModalFile()}
                 >
                   Add file
                 </button>
@@ -100,7 +100,14 @@ class Details extends Component {
                       <i className="material-icons">clear</i>
                     </button>
                   </div>
-                  <Codemirror value={data.content} className={`codemirror__${index}`} options={{mode: "javascript", lineNumbers: true, readOnly: false}}/>
+                  <Codemirror
+                    className={`codemirror__${index}`}
+                    value={data.content}
+                    options={{
+                      mode: "javascript",
+                      lineNumbers: true,
+                      readOnly: !this.props.store.ownGists
+                    }}/>
                 </div>
               )
             })
