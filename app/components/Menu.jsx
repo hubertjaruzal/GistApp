@@ -6,7 +6,6 @@ import Labels from './Labels';
 class Menu extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.store.labels.length)
   }
 
   getGistsData() {

@@ -10,6 +10,7 @@ class AppStore {
   @observable showModalGist = false;
   @observable ownGists = false;
   @observable labels = [];
+  @observable gistsLabels = [];
 
   @action saveToken = (token) => {
     localStorage.setItem('userToken', token);
@@ -42,11 +43,15 @@ class AppStore {
     return this.labels = JSON.parse("["+localStorage.getItem("labels")+"]");
   }
 
-  @action stringifyLabels = (tempLabels, labels) => {
+  @action setGistsLabelsFromStorage = (label) => {
+    return this.gistsLabels = JSON.parse("["+localStorage.getItem("gistsLabels")+"]");
+  }
+
+  @action stringifyItem = (tempLabels, labels, obj) => {
     tempLabels = labels.map(function(e){
       return JSON.stringify(e);
     });
-    localStorage.setItem('labels', tempLabels.join(", "));
+    localStorage.setItem(obj, tempLabels.join(", "));
   }
 
   @action createLabel = (label) => {
@@ -55,7 +60,7 @@ class AppStore {
       labels = JSON.parse("["+localStorage["labels"]+"]");
     }
     labels.push(label)
-    this.stringifyLabels(labels, labels);
+    this.stringifyItem(labels, labels, "labels");
     this.labels = JSON.parse("["+localStorage.getItem("labels")+"]");
   }
 
@@ -64,7 +69,61 @@ class AppStore {
     this.labels = this.labels.filter((item) => {
       return item !== label
     })
-    this.stringifyLabels(labels, this.labels);
+    this.stringifyItem(labels, this.labels, "labels");
+  }
+
+  @action removeGistLabel = (id, label) => {
+    let labels = [];
+    for(let item of this.gistsLabels) {
+      if(item[id]) {
+        item[id] = item[id].filter((data) => {
+          return data !== label
+        })
+      }
+    };
+    this.stringifyItem(labels, this.gistsLabels, "gistsLabels");
+  }
+
+  @action removeLabelFromGist = (id, label) => {
+    this.removeGistLabel(id, label);
+  }
+
+  @action isGistExistsInArray = (array, id) => {
+    for(let item of array) {
+      if(item[id]) {
+        return true;
+      }
+    };
+    return false;
+  }
+
+  @action isGistLabelExistsInArray = (array, id, value) => {
+    for(let item of array) {
+      if(item[id] && item[id].includes(value)) {
+        return false;
+      }
+    };
+    return true;
+  }
+
+  @action addLabel = (id, value) => {
+    let gistsLabels = [];
+    if(localStorage["gistsLabels"] !== undefined) {
+      gistsLabels = JSON.parse("["+localStorage["gistsLabels"]+"]");
+    }
+    if(this.isGistExistsInArray(gistsLabels, id)) {
+      if(this.isGistLabelExistsInArray(gistsLabels, id, value)) {
+        for(let item of gistsLabels) {
+          if(item[id]) {
+            item[id].push(value);
+          }
+        };
+      }
+    } else {
+      gistsLabels.push({[id]: [value]});
+    }
+    this.stringifyItem(gistsLabels, gistsLabels, "gistsLabels");
+    this.gistsLabels = JSON.parse("["+localStorage.getItem("gistsLabels")+"]");
   }
 
   @action toggleShowModalFile = () => {

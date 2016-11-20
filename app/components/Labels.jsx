@@ -26,15 +26,17 @@ class Labels extends Component {
     return (
       <section className="labels__container">
         <h3>Labels</h3>
-        <input
-          placeholder="name"
-          className="labels__input"
-        />
-        <button
-          onClick={() => this.createLabel(this.getInputValue('labels__input'))}
-        >
-          Create
-        </button>
+        <div className="labels__form">
+          <input
+            placeholder="name"
+            className="labels__input"
+          />
+          <button
+            onClick={() => this.createLabel(this.getInputValue('labels__input'))}
+          >
+            Create
+          </button>
+        </div>
         <div className="labels__items">
           {
             this.props.store.labels.map((label, index) => {

@@ -10,6 +10,10 @@ class Details extends Component {
     super(props);
   }
 
+  addLabel(id, value) {
+    this.props.store.addLabel(id, value);
+  }
+
   renderCodemirror() {
     let files = [];
     for(let file in this.props.store.gist.files) {
@@ -28,6 +32,16 @@ class Details extends Component {
 
   deleteGist(id) {
     this.props.store.deleteGist(id);
+  }
+
+  getSelectValue(selectClass) {
+    let selectValue = '';
+    selectValue = document.querySelectorAll(`.${selectClass}`);
+    return selectValue[0].value;
+  }
+
+  removeLabelFromGist(id, label) {
+    this.props.store.removeLabelFromGist(id, label);
   }
 
   getCodemirrorValue(mirrorClass) {
@@ -78,7 +92,57 @@ class Details extends Component {
           <p>{this.props.store.gist.description}</p>
         }
         {this.props.store.gist.id &&
-          <p>{this.props.store.gist.public ? "Public" : "Private"} Gist</p>
+          <div className="details__bottom">
+            <div>
+              <p>{this.props.store.gist.public ? "Public" : "Private"} Gist</p>
+            </div>
+            <div>
+              {this.props.store.gistsLabels[0] &&
+                <div>
+                  <p>Labels:</p>
+                  {
+                    this.props.store.gistsLabels.map((item) => {
+                      if(item[this.props.store.gist.id]) {
+                        return item[this.props.store.gist.id].map((label, index) => {
+                          return (
+                            <button
+                              className="details__bottom--label"
+                              onClick={() => this.removeLabelFromGist(this.props.store.gist.id, label)}
+                              key={index}
+                            >
+                              {label}
+                            </button>
+                          )
+                        })
+                      }
+                    })
+                  }
+                </div>
+              }
+            </div>
+            <button
+              className="details__bottom--button"
+              onClick={() => this.addLabel(this.props.store.gist.id, this.getSelectValue("details__select"))}
+            >
+              add label
+            </button>
+            <select
+              className="form-control input-sm details__select"
+            >
+              {
+                this.props.store.labels.map((label, index) => {
+                  return (
+                    <option
+                      key={index}
+                      value={label}
+                    >
+                      {label}
+                    </option>
+                  )
+                })
+              }
+            </select>
+          </div>
         }
         <div className="details__code">
           {

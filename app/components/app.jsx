@@ -29,6 +29,10 @@ class App extends Component {
     this.props.route.store.setLabelsFromStorage();
   }
 
+  setGistsLabelsFromStorage() {
+    this.props.route.store.setGistsLabelsFromStorage();
+  }
+
   getUserData() {
     this.props.route.store.getUserData();
   }
@@ -43,6 +47,7 @@ class App extends Component {
       this.saveLoggedIn(true);
       this.setTokenFromStorage();
       this.setLabelsFromStorage();
+      this.setGistsLabelsFromStorage();
       this.getUserData();
       this.getGistsData();
     }

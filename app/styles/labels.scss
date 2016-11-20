@@ -24,6 +24,8 @@
   }
   .labels__items {
     padding: 10px;
+    overflow: auto;
+    height: 325px;
     &--container {
       position: relative;
       padding: 10px 0;
@@ -33,7 +35,7 @@
         color: white;
       }
       button {
-        background: transparent;  
+        background: transparent;
         border: none;
         vertical-align: middle;
         right: 0;
@@ -49,5 +51,8 @@
         }
       }
     }
+  }
+  .labels__form {
+    margin: 0 0 10px 0;
   }
 }
