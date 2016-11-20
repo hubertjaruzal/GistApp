@@ -53,6 +53,9 @@
   p {
     display: inline-block;
   }
+  &--labels {
+    margin: 0 0 10px 0;
+  }
   &--label {
     outline: none;
     border: none;

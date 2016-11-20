@@ -44,6 +44,10 @@ class Details extends Component {
     this.props.store.removeLabelFromGist(id, label);
   }
 
+  checkIfGistContainsLabel(id) {
+    this.props.store.checkIfGistContainsLabel(id);
+  }
+
   getCodemirrorValue(mirrorClass) {
     let codemirrorArray = [];
     let codemirrorText = document.querySelectorAll(`.${mirrorClass} .CodeMirror-code .CodeMirror-line`);
@@ -96,30 +100,28 @@ class Details extends Component {
             <div>
               <p>{this.props.store.gist.public ? "Public" : "Private"} Gist</p>
             </div>
-            <div>
-              {this.props.store.gistsLabels[0] &&
-                <div>
-                  <p>Labels:</p>
-                  {
-                    this.props.store.gistsLabels.map((item) => {
-                      if(item[this.props.store.gist.id]) {
-                        return item[this.props.store.gist.id].map((label, index) => {
-                          return (
-                            <button
-                              className="details__bottom--label"
-                              onClick={() => this.removeLabelFromGist(this.props.store.gist.id, label)}
-                              key={index}
-                            >
-                              {label}
-                            </button>
-                          )
-                        })
-                      }
-                    })
-                  }
-                </div>
-              }
-            </div>
+            {this.props.store.checkIfGistContainsLabel(this.props.store.gist.id) &&
+              <div className="details__bottom--labels">
+                <p>Labels:</p>
+                {
+                  this.props.store.gistsLabels.map((item) => {
+                    if(item[this.props.store.gist.id]) {
+                      return item[this.props.store.gist.id].map((label, index) => {
+                        return (
+                          <button
+                            className="details__bottom--label"
+                            onClick={() => this.removeLabelFromGist(this.props.store.gist.id, label)}
+                            key={index}
+                          >
+                            {label}
+                          </button>
+                        )
+                      })
+                    }
+                  })
+                }
+              </div>
+            }
             <button
               className="details__bottom--button"
               onClick={() => this.addLabel(this.props.store.gist.id, this.getSelectValue("details__select"))}

@@ -88,6 +88,15 @@ class AppStore {
     this.removeGistLabel(id, label);
   }
 
+  @action checkIfGistContainsLabel = (id) => {
+    for(let item of this.gistsLabels) {
+      if(item[id] && (item[id].length > 0)) {
+        return true;
+      }
+    };
+    return false;
+  }
+
   @action isGistExistsInArray = (array, id) => {
     for(let item of array) {
       if(item[id]) {

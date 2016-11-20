@@ -28,6 +28,24 @@ class List extends Component {
                   {gist.description !== '' &&
                     <p>Description: {gist.description}</p>
                   }
+                  {this.props.store.checkIfGistContainsLabel(gist.id) &&
+                    <div>
+                      <p className="list__paragraph">Labels: </p>
+                      {
+                        this.props.store.gistsLabels.map((item) => {
+                          if(item[gist.id]) {
+                            return item[gist.id].map((label, index) => {
+                              return (
+                                <span key={index}>
+                                  {" " + label}
+                                </span>
+                              )
+                            })
+                          }
+                        })
+                      }
+                    </div>
+                  }
                 </div>
               )
             })
