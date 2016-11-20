@@ -42,17 +42,29 @@ class AppStore {
     return this.labels = JSON.parse("["+localStorage.getItem("labels")+"]");
   }
 
+  @action stringifyLabels = (tempLabels, labels) => {
+    tempLabels = labels.map(function(e){
+      return JSON.stringify(e);
+    });
+    localStorage.setItem('labels', tempLabels.join(", "));
+  }
+
   @action createLabel = (label) => {
     let labels = [];
     if(localStorage["labels"] !== undefined) {
       labels = JSON.parse("["+localStorage["labels"]+"]");
     }
     labels.push(label)
-    labels = labels.map(function(e){
-      return JSON.stringify(e);
-    });
-    localStorage.setItem('labels', labels.join(", "));
+    this.stringifyLabels(labels, labels);
     this.labels = JSON.parse("["+localStorage.getItem("labels")+"]");
+  }
+
+  @action removeLabel = (label) => {
+    let labels = [];
+    this.labels = this.labels.filter((item) => {
+      return item !== label
+    })
+    this.stringifyLabels(labels, this.labels);
   }
 
   @action toggleShowModalFile = () => {

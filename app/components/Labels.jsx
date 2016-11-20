@@ -12,6 +12,10 @@ class Labels extends Component {
     this.props.store.createLabel(label)
   }
 
+  removeLabel(label) {
+    this.props.store.removeLabel(label)
+  }
+
   getInputValue(filenameClass) {
     let filename = '';
     filename = document.querySelectorAll(`.${filenameClass}`);
@@ -35,7 +39,17 @@ class Labels extends Component {
           {
             this.props.store.labels.map((label, index) => {
               return (
-                <p className={"labels__item--"+index}>{label}</p>
+                <div
+                  key={index}
+                  className="labels__items--container"
+                >
+                  <p className={"labels__item--"+index}>{label}</p>
+                  <button
+                    onClick={() => this.removeLabel(label)}
+                  >
+                    <i className="material-icons">clear</i>
+                  </button>
+                </div>
               )
             })
           }
