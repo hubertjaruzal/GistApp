@@ -40,6 +40,11 @@ class AppStore {
     return false;
   }
 
+  @action logout = () => {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userToken");
+  }
+
   @action searchByLabel = (text) => {
     let idArray = [];
     if(text == "") {

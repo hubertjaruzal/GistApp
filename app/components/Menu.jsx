@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import Labels from './Labels';
+import { browserHistory } from 'react-router';
 
 @observer
 class Menu extends Component {
@@ -26,6 +27,12 @@ class Menu extends Component {
 
   toggleShowModalGist() {
     this.props.store.toggleShowModalGist();
+  }
+
+  logoutlabel() {
+    this.props.store.logout();
+    browserHistory.push('/');
+    window.location.reload();
   }
 
   render() {
@@ -60,6 +67,11 @@ class Menu extends Component {
         <Labels
           store={this.props.store}
         />
+        <button
+          className="menu__button--logout" onClick={() => this.logoutlabel()}
+        >
+          Logout
+        </button>
       </nav>
     );
   }

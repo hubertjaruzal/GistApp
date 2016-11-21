@@ -56,33 +56,37 @@ class App extends Component {
   render() {
     return (
       <section>
-        {this.props.route.store.showModalGist &&
-          <ModalGist
-            store={this.props.route.store}
-          />
-        }
-        {this.props.route.store.showModalFile &&
-          <ModalFile
-            store={this.props.route.store}
-          />
-        }
         <Header
           isLoggedIn={this.props.route.store.loggedIn}
           key={this.props.route.Config.key}
           username={this.props.route.store.user.name}
           avatar={this.props.route.store.user.avatar_url}
         />
-        <section className="main__container">
-          <Menu
-            store={this.props.route.store}
-          />
-          <List
-            store={this.props.route.store}
-          />
-          <Details
-            store={this.props.route.store}
-          />
-        </section>
+        {this.props.route.store.isUserLoggedIn() &&
+          <div>
+            {this.props.route.store.showModalGist &&
+              <ModalGist
+                store={this.props.route.store}
+              />
+            }
+            {this.props.route.store.showModalFile &&
+              <ModalFile
+                store={this.props.route.store}
+              />
+            }
+            <section className="main__container">
+              <Menu
+                store={this.props.route.store}
+              />
+              <List
+                store={this.props.route.store}
+              />
+              <Details
+                store={this.props.route.store}
+              />
+            </section>
+          </div>
+        }
         <div>
           {this.props.children}
         </div>

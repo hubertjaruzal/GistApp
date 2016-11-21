@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+import { browserHistory } from 'react-router';
 
 @observer
 class Auth extends Component {
@@ -24,7 +25,7 @@ class Auth extends Component {
   }
 
   componentDidMount() {
-    if(localStorage.getItem('userToken') === '' || 'undefined') {
+    if(localStorage.getItem('userToken') === null) {
       const code = window.location.href.match(/\?code=(.*)/)[1];
       fetch(`http://localhost:9999/authenticate/${code}`).then((response) => {
         return response.json();
@@ -35,17 +36,26 @@ class Auth extends Component {
         this.saveToken(token);
         this.toggleLoggedIn();
         this.saveLoggedIn(true);
+        browserHistory.push('/');
+        window.location.reload();
       });
     } else {
       this.toggleLoggedIn();
       this.saveLoggedIn(true);
+      browserHistory.push('/');
+      window.location.reload();
     }
   }
 
   render() {
     return (
-      <section>
-        <h2>AUTH</h2>
+      <section className="loader">
+        <div className="sk-folding-cube loader__cube">
+          <div className="sk-cube1 sk-cube"></div>
+          <div className="sk-cube2 sk-cube"></div>
+          <div className="sk-cube4 sk-cube"></div>
+          <div className="sk-cube3 sk-cube"></div>
+        </div>
       </section>
     );
   }
