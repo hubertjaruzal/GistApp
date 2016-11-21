@@ -6,6 +6,7 @@ import List from './List';
 import Details from './Details';
 import ModalFile from './ModalFile'
 import ModalGist from './ModalGist';
+import Loader from './Loader';
 
 @observer
 class App extends Component {
@@ -56,6 +57,9 @@ class App extends Component {
   render() {
     return (
       <section>
+        {this.props.route.store.isLoading &&
+          <Loader />
+        }
         <Header
           isLoggedIn={this.props.route.store.loggedIn}
           key={this.props.route.Config.key}

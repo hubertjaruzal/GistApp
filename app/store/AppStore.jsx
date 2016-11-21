@@ -12,6 +12,12 @@ class AppStore {
   @observable ownGists = false;
   @observable labels = [];
   @observable gistsLabels = [];
+  @observable isLoading = false;
+  @observable gistsType = '';
+
+  @action toggleIsLoading = () => {
+    return this.isLoading = !this.isLoading;
+  }
 
   @action saveToken = (token) => {
     localStorage.setItem('userToken', token);
@@ -185,6 +191,7 @@ class AppStore {
   }
 
   @action getGistsData = () => {
+    this.gistsType = 'all';
     fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
@@ -195,6 +202,7 @@ class AppStore {
   }
 
   @action getPublicGistsData = () => {
+    this.gistsType = 'public';
     fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
@@ -205,6 +213,7 @@ class AppStore {
   }
 
   @action getPrivateGistsData = () => {
+    this.gistsType = 'private';
     fetch(`https://api.github.com/gists?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
@@ -232,6 +241,16 @@ class AppStore {
     });
   }
 
+  @action refreshData = () => {
+    if(this.gistsType === 'public') {
+      return this.getPublicGistsData();
+    }
+    else if(this.gistsType === 'private') {
+      return this.getPrivateGistsData();
+    }
+    return this.getGistsData();
+  }
+
   @action editGist = (id, filename, content, description = '') => {
     fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`,
       {
@@ -249,7 +268,9 @@ class AppStore {
           }
         })
       }).then((response) => {
-      return response.json();
+        this.refreshData();
+        this.getGistData(id);
+        return response.json();
     });
   }
 
@@ -271,7 +292,9 @@ class AppStore {
           }
         })
       }).then((response) => {
-      return response.json();
+        this.toggleShowModalGist();
+        this.refreshData();
+        return response.json();
     });
   }
 
@@ -291,7 +314,10 @@ class AppStore {
           }
         })
       }).then((response) => {
-      return response.json();
+        this.toggleShowModalFile();
+        this.refreshData();
+        this.getGistData(id);
+        return response.json();
     });
   }
 
@@ -309,7 +335,7 @@ class AppStore {
           }
         })
       }).then((response) => {
-      return response.json();
+        return response.json();
     });
   }
 
@@ -322,7 +348,9 @@ class AppStore {
         },
         method: 'DELETE'
       }).then((response) => {
-      return response.json();
+        this.refreshData();
+        this.getGistData(id);
+        return response.json();
     });
   }
 }
