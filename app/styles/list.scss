@@ -4,6 +4,15 @@
   display: inline-block;
   background: $second-color;
   overflow: auto;
+  .list__inputBox {
+    padding: 10px;
+    border-bottom: 1px solid $border-grey;
+    input {
+      padding: 5px;
+      outline: none;
+      width: 100%;
+    }
+  }
 }
 
 .list__gist {

@@ -11,9 +11,26 @@ class List extends Component {
     this.props.store.getGistData(id);
   }
 
+  searchByLabel(label) {
+    this.props.store.searchByLabel(label);
+  }
+
+  getInputValue(filenameClass) {
+    let filename = '';
+    filename = document.querySelectorAll(`.${filenameClass}`);
+    return filename[0].value;
+  }
+
   render() {
     return (
       <section className="list__container">
+        <div className="list__inputBox">
+          <input
+            className="list__input"
+            placeholder="Search by label"
+            onChange={() => this.searchByLabel(this.getInputValue("list__input"))}
+          />
+        </div>
         <div>
           {
             this.props.store.gists.map((gist, index) => {

@@ -5,6 +5,7 @@ class AppStore {
   @observable loggedIn = false;
   @observable user = {};
   @observable gists = [];
+  @observable gistsStatic = [];
   @observable gist = {};
   @observable showModalFile = false;
   @observable showModalGist = false;
@@ -37,6 +38,33 @@ class AppStore {
       return true;
     }
     return false;
+  }
+
+  @action searchByLabel = (text) => {
+    let idArray = [];
+    if(text == "") {
+      return this.gists = this.gistsStatic;
+    }
+    for(let item of this.gistsLabels) {
+      for(let id in item) {
+        for(let label of item[id]) {
+          if(label.indexOf(text) > -1) {
+            idArray.push(id);
+          }
+        }
+      }
+    }
+    return this.gists = this.showFilteredGists(idArray);
+  }
+
+  @action showFilteredGists = (idArray) => {
+    let filteredGists = [];
+    idArray.forEach((id) => {
+      filteredGists.push(this.gistsStatic.filter(gist => {
+        return gist.id === id;
+      }));
+    });
+    return filteredGists.concat.apply([], filteredGists);
   }
 
   @action setLabelsFromStorage = (label) => {
@@ -157,7 +185,7 @@ class AppStore {
     }).then(json => {
       this.gist =  {};
       this.ownGists =  true;
-      return this.gists = json;
+      return this.gists = this.gistsStatic = json;
     });
   }
 
@@ -167,7 +195,7 @@ class AppStore {
     }).then(json => {
       this.gist =  {};
       this.ownGists =  true;
-      return this.gists = json.filter(x => x.public);
+      return this.gists = this.gistsStatic = json.filter(x => x.public);
     });
   }
 
@@ -177,7 +205,7 @@ class AppStore {
     }).then(json => {
       this.gist =  {};
       this.ownGists =  true;
-      return this.gists = json.filter(x => !x.public);
+      return this.gists = this.gistsStatic = json.filter(x => !x.public);
     });
   }
 
@@ -195,7 +223,7 @@ class AppStore {
     }).then(json => {
       this.gist =  {};
       this.ownGists =  false;
-      return this.gists = json;
+      return this.gists = this.gistsStatic = json;
     });
   }
 
