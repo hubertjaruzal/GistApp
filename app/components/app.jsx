@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import Header from './Header';
 import Menu from './Menu';
 import List from './List';
-import Details from './Details';
+import Details from './details/Details';
 import ModalFile from './ModalFile'
 import ModalGist from './ModalGist';
 import Loader from './Loader';
@@ -62,7 +62,7 @@ class App extends Component {
         }
         <Header
           isLoggedIn={this.props.route.store.loggedIn}
-          key={this.props.route.Config.key}
+          route={this.props.route}
           username={this.props.route.store.user.name}
           avatar={this.props.route.store.user.avatar_url}
         />

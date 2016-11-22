@@ -58,7 +58,7 @@ module.exports = {
   ],
   externals: {
     Config: JSON.stringify({
-      key: 'KEY'
+      client_id: 'KEY'
     })
   }
 };

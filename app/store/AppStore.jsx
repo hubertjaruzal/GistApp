@@ -227,6 +227,8 @@ class AppStore {
     fetch(`https://api.github.com/gists/${id}?access_token=${this.token}`).then((response) => {
       return response.json();
     }).then(json => {
+      this.gist = json;
+      console.log(json.files['gistfile1.txt'].content)
       return this.gist = json;
     });
   }
@@ -268,10 +270,10 @@ class AppStore {
           }
         })
       }).then((response) => {
-        this.refreshData();
-        this.getGistData(id);
         return response.json();
     });
+    this.refreshData();
+    this.getGistData(id);
   }
 
   @action createGist = (filename, content, description = '', status) => {

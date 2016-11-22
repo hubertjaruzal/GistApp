@@ -28,7 +28,7 @@ class Auth extends Component {
   componentDidMount() {
     if(localStorage.getItem('userToken') === null) {
       const code = window.location.href.match(/\?code=(.*)/)[1];
-      fetch(`http://localhost:9999/authenticate/${code}`).then((response) => {
+      fetch(`https://gists-gatekeeper.herokuapp.com/authenticate/${code}`).then((response) => {
         return response.json();
       }).then((json) => {
         return json.token

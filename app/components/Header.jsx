@@ -15,7 +15,7 @@ class Header extends Component {
             <button
               className="user__info--login"
               onClick={() => {
-                location.href = `https://github.com/login/oauth/authorize?scope=user:email,gist&client_id=aea9e72659857b025e94`;
+                location.href = `https://github.com/login/oauth/authorize?scope=user:email,gist&client_id=${this.props.route.Config.client_id}`;
               }}
             >
               Sign in with github
