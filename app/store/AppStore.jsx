@@ -259,7 +259,7 @@ class AppStore {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        method: 'PATCH',
+        method: 'POST',
         body: JSON.stringify({
           description: description,
           files: {
@@ -268,8 +268,12 @@ class AppStore {
             }
           }
         })
-      }).then((response) => {
-        return response.json();
+      })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      return this.gist = json;
     });
     this.refreshData();
     this.getGistData(id);
@@ -306,7 +310,7 @@ class AppStore {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        method: 'PATCH',
+        method: 'POST',
         body: JSON.stringify({
           files: {
             [filename]: {
@@ -314,12 +318,16 @@ class AppStore {
             }
           }
         })
-      }).then((response) => {
-        this.toggleShowModalFile();
-        this.refreshData();
-        this.getGistData(id);
-        return response.json();
+      })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      return this.gists = json;
     });
+    this.toggleShowModalFile();
+    this.refreshData();
+    this.getGistData(id);
   }
 
   @action deleteGistFile = (id, filename) => {
@@ -329,15 +337,20 @@ class AppStore {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        method: 'PATCH',
+        method: 'POST',
         body: JSON.stringify({
           files: {
             [filename]: null
           }
         })
-      }).then((response) => {
-        return response.json();
+      })
+    .then((response) => {
+      return response.json();
+    }).then((json) => {
+      return this.gist = json;
     });
+    this.refreshData();
+    this.getGistData(id);
   }
 
   @action deleteGist = (id) => {
