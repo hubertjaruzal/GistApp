@@ -13,3 +13,21 @@ npm i
 node gatekeeper/server.js
 npm start
 ```
+
+#Design
+
+Frameworks, Tools:
+
+1. ReactJS - Frontend Framework
+2. MobX - State Management
+3. Webpack - Module bundler
+4. Sass - CSS preprocessor
+5. Gategeeper - (https://github.com/prose/gatekeeper) - Github OAuth helper for Client side
+6. Jest - Library for JavaScript testing.
+7. CodeMirror - Text editor
+
+Labels, User's token are stored in LocalStorage.
+
+#Note
+
+Switching status between private and public gist isnt available in github api.
