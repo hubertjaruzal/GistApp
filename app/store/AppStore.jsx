@@ -228,7 +228,6 @@ class AppStore {
       return response.json();
     }).then(json => {
       this.gist = json;
-      console.log(json.files['gistfile1.txt'].content)
       return this.gist = json;
     });
   }
